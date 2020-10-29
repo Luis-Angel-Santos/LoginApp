@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegistroComponent implements OnInit {
 
   usuario: UsuarioModel;
+  recordarme = false;
 
   constructor(private auth: AuthService,
               private router: Router) { }
@@ -26,7 +27,7 @@ export class RegistroComponent implements OnInit {
     if (form.invalid) { return; }
 
     swal({
-      button: false,
+      buttons:{value: false},
       icon: 'info',
       text: 'Espere por favor...',
       closeOnClickOutside: false,
@@ -36,6 +37,10 @@ export class RegistroComponent implements OnInit {
     .subscribe(resp => {
       console.log(resp);
       swal.close();
+      if (this.recordarme) {
+        localStorage.setItem('email', this.usuario.email);
+      }
+
       this.router.navigateByUrl('/home');
     }, (err) => {
       console.log(err.error.error.message);
