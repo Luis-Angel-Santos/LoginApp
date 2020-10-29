@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { UsuarioModel } from '../../models/usuario.model';
 
 @Component({
@@ -7,9 +8,9 @@ import { UsuarioModel } from '../../models/usuario.model';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-  
+
   usuario: UsuarioModel;
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -18,9 +19,10 @@ export class RegistroComponent implements OnInit {
   }
 
 
-  onSubmit(){
-    console.log('bien');
-    
-  }  
+  onSubmit(form: NgForm ){
+    if (form.invalid) { return; }
+    console.log(form);
+
+  }
 
 }
